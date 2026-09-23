@@ -1,0 +1,39 @@
+# =============================================================
+# Konfiguracija alata za backend (api/)
+# =============================================================
+# pyproject.toml je standardni Python konfiguracijski file (PEP 621).
+# Ovdje ne definiramo zavisnosti (to je u requirements.txt),
+# ali konfiguriramo linter, formatter i test runner.
+# =============================================================
+
+[project]
+name = "narudzbe-api"
+version = "0.1.0"
+description = "Narudzbe i dostava API"
+requires-python = ">=3.11"
+
+# -- Ruff (linter) --
+# Ruff je iznimno brz Python linter koji zamjenjuje flake8, isort, itd.
+# select: E = pycodestyle errors, F = pyflakes, I = isort, W = warnings
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+select = ["E", "F", "I", "W"]
+
+# Sortiranje importova: "app" je naš paket (first-party).
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+# -- Black (formatter) --
+# Black forsira jedinstven stil koda — nema rasprave o formatiranju.
+[tool.black]
+target-version = ["py311"]
+line-length = 88
+
+# -- Pytest --
+# testpaths govori pytestu gdje tražiti testove.
+# asyncio_mode = "auto" znači da ne moramo ručno označavati async testove.
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+filterwarnings = ["ignore::DeprecationWarning:pytest_asyncio"]
