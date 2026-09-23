@@ -53,6 +53,7 @@ async def register_customer(db: AsyncSession, body: RegisterRequest) -> User:
         role="customer",
         full_name=body.full_name,
         email=body.email,
+        phone=body.phone,
         is_active=True,
     )
     return await user_repo.add(db, user)

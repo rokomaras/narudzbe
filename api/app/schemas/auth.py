@@ -1,6 +1,8 @@
 # =============================================================
 # auth.py — Pydantic sheme za autentikaciju
 # =============================================================
+from typing import Optional
+
 from pydantic import BaseModel, Field
 
 
@@ -15,7 +17,7 @@ class RegisterRequest(BaseModel):
     full_name: str = Field(min_length=2, max_length=100)
     # jednostavna provjera oblika (bez dodatne biblioteke email-validator)
     email: str = Field(max_length=120, pattern=r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
-
+    phone: Optional[str] = Field(default=None, max_length=30)
 
 class RefreshRequest(BaseModel):
     refresh_token: str
@@ -35,6 +37,7 @@ class UserResponse(BaseModel):
     role: str
     full_name: str
     email: str
+    phone: str | None
     is_active: bool
 
     model_config = {"from_attributes": True}

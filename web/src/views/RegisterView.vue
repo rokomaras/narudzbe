@@ -15,6 +15,7 @@ const submitting = ref(false)
 const fields = [
   { key: 'full_name', label: 'Ime i prezime', type: 'text', autocomplete: 'name' },
   { key: 'email', label: 'Email', type: 'email', autocomplete: 'email' },
+  { key: 'phone', label: 'Telefon (opcionalno)', type: 'tel', autocomplete: 'tel' },
   { key: 'username', label: 'Korisničko ime', type: 'text', autocomplete: 'username' },
   { key: 'password', label: 'Lozinka', type: 'password', autocomplete: 'new-password' },
 ]

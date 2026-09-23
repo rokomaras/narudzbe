@@ -126,3 +126,22 @@ async def test_register_cannot_choose_role(client):
     resp = await client.post("/auth/register", json=payload)
     assert resp.status_code == 201
     assert resp.json()["role"] == "customer"
+
+async def test_register_with_phone_is_saved(client):
+    payload = {
+        "username": "sfon", "password": "tajna123", "full_name": "S F",
+        "email": "s@example.com", "phone": "+385911234567",
+    }
+    resp = await client.post("/auth/register", json=payload)
+    assert resp.status_code == 201
+    assert resp.json()["phone"] == "+385911234567"
+
+
+async def test_register_without_phone_is_optional(client):
+    payload = {
+        "username": "nofon", "password": "tajna123", "full_name": "N F",
+        "email": "n@example.com",
+    }
+    resp = await client.post("/auth/register", json=payload)
+    assert resp.status_code == 201
+    assert resp.json()["phone"] is None
